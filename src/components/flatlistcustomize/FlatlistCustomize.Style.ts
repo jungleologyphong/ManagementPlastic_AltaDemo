@@ -31,6 +31,23 @@ export const styles = StyleSheet.create({
     width: 300, 
     height: 50
   },
+  text2: {
+    fontFamily: Font.LexendDeca_Thin,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 20,
+    color: '#007173',
+    marginRight: 10,
+    marginTop: 15,
+  },
+  text: {
+    fontFamily: Font.LexendDeca_Thin,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 15,
+    color: 'black',
+    marginRight: 10,
+  },
   table: {
     borderRadius: 16,
     borderWidth: 1,
@@ -152,5 +169,41 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     fontSize: 25,
-  }
+  },
+  containerBtnEdition: {
+    flexDirection: 'row', 
+    justifyContent:'center'
+  },
+  btnEdition: {
+    backgroundColor: '#FEFEFE', 
+    borderWidth: 1, 
+    borderColor: '#007173',
+    borderRadius: 8,
+    width: 135, 
+    height: 35, 
+    justifyContent:'center', 
+    alignItems: 'center',
+    marginTop: 10,
+    marginLeft: 115,
+  },
+  btnEditionSave: {
+    justifyContent:'center', 
+    alignItems: 'center',
+    backgroundColor: '#007173', 
+    borderWidth: 1, 
+    borderColor: '#007173',
+    borderRadius: 8,
+    width: 135, 
+    height: 35, 
+    marginTop: 10,
+    marginRight: 140,
+  },
+  txtBtnSave: {
+    color: '#FFFFFF',
+    fontWeight: '900'
+  },
+  txtBtnCancel: {
+    color: '#007173',
+    fontWeight: '900'
+  },
 })

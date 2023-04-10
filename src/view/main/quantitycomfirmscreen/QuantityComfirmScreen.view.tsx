@@ -1,16 +1,64 @@
-import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Font } from '~assets/fonts';
+import React, {useState} from 'react';
+import {View, Text, ScrollView, Modal, Pressable, TextInput} from 'react-native';
+import {TouchableOpacity } from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from './QuantityComfirmScreen.styles';
 import {HeaderCustomize} from '~components';
 
+
+const ModalComfirm : React.FC<any> = (props) => {
+  const {showModal, setIsShowModal} = props;
+  return (
+    <Modal transparent visible={showModal} animationType="slide">
+      <View style={styles.containerModal}>
+        <View style={styles.containerInfo}>
+          <Text style={styles.title}>Xác nhận duyệt báo cáo sản lượng của công nhân</Text>
+          <Text style={styles.content3}>“Bạn có muốn duyệt báo cáo sản lượng này của công{'\n'}nhân này không"</Text>
+          <View style={styles.containerRow}>
+            <Pressable style={styles.btnEditionSave} onPress={()=> setIsShowModal(false)}>
+              <Text style={styles.txtBtnSave}>Hủy</Text>
+            </Pressable>
+            <Pressable style={styles.btnEditionComfirm} onPress={()=> setIsShowModal(false)}>
+              <Text style={styles.txtBtnSave}>Xác nhận</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+const ModalRefuse : React.FC<any> = (props) => {
+  const {isShowModalRefuse, setModalRefuse} = props;
+  return (
+    <Modal transparent visible={isShowModalRefuse} animationType="slide">
+      <View style={styles.containerModal}>
+        <View style={styles.containerRefuse}>
+          <Text style={styles.titleRefuseRed}>Từ chối báo cáo của công nhân</Text>
+          <Text style={styles.titleRefuse}>Lý do từ chối</Text>
+          <TextInput style={styles.textInputRefuse} placeholder='Nhập' />
+          <View style={styles.containerRow}>
+            <Pressable style={styles.btnEditionSave} onPress={()=> setModalRefuse(false)}>
+              <Text style={styles.txtBtnSave}>Hủy</Text>
+            </Pressable>
+            <Pressable style={styles.btnEditionComfirm} onPress={()=> setModalRefuse(false)}>
+              <Text style={styles.txtBtnSave}>Xác nhận</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
 export const QuantityComfirmScreen: React.FC<any> = props => {
   const {} = props;
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModalRefuse, setModalRefuse] = useState(false);
   return (
     <><HeaderCustomize type={'Normal'} title={'Túi Bio Bag 4 ly, màu trắng sứ, không nhám'} />
+      <ModalComfirm showModal={isShowModal} setIsShowModal={setIsShowModal} />
+      <ModalRefuse isShowModalRefuse={isShowModalRefuse} setModalRefuse={setModalRefuse} />
       <View style={styles.container}>
         <View style={styles.table}>
           <View style={styles.margin}>
@@ -110,12 +158,12 @@ export const QuantityComfirmScreen: React.FC<any> = props => {
                   <TouchableOpacity style={styles.btnEdition}>
                     <Text style={styles.txtBtnCancel}>Hủy</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.btnEditionSave}>
-                    <Text style={styles.txtBtnSave}>Lưu</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.btnEditionComfirm}>
+                  <Pressable style={styles.btnEditionSave} onPress={() => setModalRefuse(true)}>
+                    <Text style={styles.txtBtnSave}>Từ chối</Text>
+                  </Pressable>
+                  <Pressable style={styles.btnEditionComfirm} onPress={() => {setIsShowModal(true)}}>
                     <Text style={styles.txtBtnSave}>Xác nhận</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               </ScrollView>
             </SafeAreaView>

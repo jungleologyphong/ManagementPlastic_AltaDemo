@@ -54,7 +54,9 @@ const HeaderNormal: React.FC<any> = (props) => {
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity style={styles.containerRight} onPress={() => navigation.goBack()}>
           <View style={styles.rightAvatar}>
-            <Image style={styles.img} source={getSource('AVATARHEADER')}></Image>
+            <TouchableOpacity onPress={() => navigation.navigate('InfoScreen')}>
+              <Image style={styles.img} source={getSource('AVATARHEADER')}></Image>
+            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </View>

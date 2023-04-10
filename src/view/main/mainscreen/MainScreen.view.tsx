@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialScreen, DeviceScreen, QuantityScreen, QuantityComfirmScreen, InfoScreen} from '~view';
-import { TouchableOpacity, Image } from 'react-native';
+import { InfoBlowScreen ,BlowScreen, DeviceScreen, QuantityScreen, QuantityComfirmScreen, InfoScreen} from '~view';
+import { Image } from 'react-native';
 import { getSource } from '~assets';
 
 const Tab = createBottomTabNavigator();
@@ -12,7 +12,7 @@ export const MainScreen: React.FC<any> = (props, {navigation}) => {
 
   return (
     <Tab.Navigator>
-      <Tab.Screen name="InfoScreen" component={InfoScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
+      <Tab.Screen name="InfoBlowScreen" component={InfoBlowScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
         return (
           <Image
             style={{width: size * 2.55, height: size * 2.2,}}
@@ -20,11 +20,11 @@ export const MainScreen: React.FC<any> = (props, {navigation}) => {
           />
         );
       },}} />
-      <Tab.Screen name="MaterialScreen" component={MaterialScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
+      <Tab.Screen name="BlowScreen" component={BlowScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
         return (
           <Image
-            style={{width: size * 2.55, height: size * 2.2,}}
-            source={focused ? getSource('MATERIAL') : getSource('MATERIAL_FOCUSED')}
+            style={{width: size * 3, height: size * 2.35,}}
+            source={focused ? getSource('BLOW') : getSource('BLOW_FOCUSED')}
           />
         );
       },}} />

@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -33,6 +33,52 @@ export const styles = StyleSheet.create({
     marginLeft: 24, 
     marginBottom: 24
   },
+  containerModal: { 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: hp('100%')
+  },
+  containerInfo: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: hp('25%'),
+    width: wp('35%'),
+    borderRadius: wp('0.8%'),
+    borderWidth: 3,
+    borderColor: '#F7F7F7',
+    backgroundColor: 'white'
+  },
+  containerRefuse: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: hp('47%'),
+    width: wp('35%'),
+    borderRadius: wp('0.8%'),
+    borderWidth: 3,
+    borderColor: '#F7F7F7',
+    backgroundColor: 'white'
+  },
+  content3: {
+    textAlign: 'center',
+    fontFamily: Font.LexendDeca_Thin, 
+    fontStyle: 'normal', 
+    fontWeight: '900', 
+    fontSize: 15, 
+    lineHeight: 30,
+    color: '#333333', 
+    marginTop: 16
+  },
+  textInputRefuse: {
+    alignSelf: 'flex-start',
+    textAlignVertical: 'top',
+    borderWidth: 3,
+    borderColor: '#F7F7F7',
+    borderRadius: 8,
+    width: wp('32%'),
+    height: hp('25%'),
+    marginLeft: 16,
+    marginTop: 16,
+  },
   line: {
     marginTop: 16, 
     alignItems: 'center',
@@ -57,6 +103,26 @@ export const styles = StyleSheet.create({
     fontSize: 24, 
     color: '#007173',
     marginTop: 24
+  },
+  titleRefuseRed: {
+    fontFamily: Font.LexendDeca_Thin, 
+    fontStyle: 'normal', 
+    fontWeight: '700', 
+    fontSize: 24, 
+    color: 'red',
+    marginTop: 24
+  },
+  titleRefuse: {
+    alignSelf: 'flex-start',
+    textAlign: 'center',
+    fontFamily: Font.LexendDeca_Thin, 
+    fontStyle: 'normal', 
+    fontWeight: '900', 
+    fontSize: 15, 
+    lineHeight: 30,
+    color: '#333333', 
+    marginTop: 16,
+    marginLeft: 16,
   },
   txtInfoStaff: {
     fontFamily: Font.LexendDeca_Thin, 

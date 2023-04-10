@@ -164,7 +164,8 @@ export const QuantityScreen: React.FC<any> = props => {
   return (
     <View>
       <HeaderCustomize type={'Normal'} title={'Túi Bio Bag 4 ly, màu trắng sứ, không nhám'} />
-      <FlatlistCustomize 
+      <FlatlistCustomize
+        typeFlatlist={'Normal'}
         titleParams={'DANH SÁCH BÁO CÁO SẢN LƯỢNG THỔI CẦN XÁC NHẬN'} 
         typeHeaders={'Normal'}
         headersParams={headers} 

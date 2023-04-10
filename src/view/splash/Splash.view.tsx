@@ -9,8 +9,6 @@ export const Splash: React.FC<any> = props => {
   const {} = props;
   const {label} = SplashLogic();
 
-  console.log('Config', Config);
-
   return (
     <View style={styles.container}>
       <Image source={getSource('LOGO')} style={styles.img} />
