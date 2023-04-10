@@ -1,44 +1,101 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextProps, TouchableOpacity, Text, Image, FlatList, SafeAreaView, ScrollView} from 'react-native';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import { Font } from '~assets/fonts';
+import React, {useCallback, useEffect, useState} from 'react';
+import {View, TextProps, TouchableOpacity, Text, Image, FlatList} from 'react-native';
+import DatePicker from 'react-native-date-picker'
 import { getSource } from '~assets';
-import { HeaderCustomize } from '~components/headercustomize/HeaderCustomize';
-import { values } from 'lodash';
-
+import DropDownPicker from 'react-native-dropdown-picker';
+import {styles} from './FlatlistCustomize.Style';
 export interface FlatListCustomizeProps extends TextProps {
     titleParams ? : string,
     titleHeaders ? : string,
     typeHeaders ? : string,
     headersParams ? : string[];
-    dataParams ? : object[];
+    dataParams ? : [];
 }
 
 export const FlatlistCustomize: React.FC<any> = (props) => {
-  const {headersParams, titleParams, titleHeaders, typeHeaders, typeFlatlist, dataParams} = props;
+  const {headersParams, titleParams, typeFlatlist, dataParams} = props;
+
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [unFocus, setUnFocus] = useState(false);
-    
+  const [filterData, setFilterData] = useState([]);
+
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  const [date, setDate] = useState(new Date('2023-01-01'));
+  const [value, setValue] = useState('Default');
+
+  const formattedDate = date.toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
+  const filterDataByDateShift = (dataParams: [], selectedDate: string, selectedShift: string) => {
+    return dataParams.filter(items => {
+      return items.date === selectedDate && items.shift === selectedShift;
+    });
+  };
+
+  const uniqueShifts = dataParams.reduce((acc: any[], current: [{shift: 'Default'}]) => {
+    if (!acc.includes(current.shift)) {
+      acc.push(current.shift);
+    }
+    return acc;
+  }, []);
+
+  const shiftObjects = uniqueShifts.map((shift: string) => {
+    return { shift: shift };
+  });
+
+  const defaultShift = { shift: 'Default' };
+  shiftObjects.unshift(defaultShift);
+
   const loadData = () => {
     setData(dataParams);
     setUnFocus(!unFocus);
+    setFilterData(filterDataByDateShift(dataParams, formattedDate, value));
   };
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [dataParams, formattedDate, value]);
 
   return (
-    <><HeaderCustomize type={typeHeaders} title={titleHeaders} />
+    <>
       <View style={styles.container}>
         <View style={styles.table}>
           <Text style={styles.titleParams}>{titleParams}</Text>
-          <View style={{flexDirection: 'row'}}>
-            {/**/}
+          <View style={styles.containerFilter}>
+            <View style={styles.containerDateFilter}>
+              <Text style={styles.txtDate}>Ngày</Text>
+              <TouchableOpacity onPress={() => {setOpenDatePicker(true);}} style={styles.containerBtnDate}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{width: 250, height: 18, fontSize: 13, color: '#A3A3A3' }}>{' ' + formattedDate}</Text>
+                  <Image source={getSource('CALENDAR')}/>
+                  <DatePicker modal date={date} open={openDatePicker} onConfirm={(date) => {setOpenDatePicker(false); setDate(date);}} onCancel={() => {setOpenDatePicker(false);}} />
+                </View>
+              </TouchableOpacity>  
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 30}}>
+              <Text style={styles.txtDate}>Ca</Text>
+              <View style={{zIndex: 1, alignItems: 'center', justifyContent:'center'}}>
+                <DropDownPicker
+                  style={{alignItems: 'center', justifyContent:'center', borderWidth: 1, borderRadius: 5, borderColor: '#E0E0E0', width: 300}}
+                  placeholder='Chọn ca...'
+                  open={openDropdown}
+                  value={value}
+                  items={shiftObjects} 
+                  setOpen={setOpenDropdown}
+                  setValue={setValue}
+                  schema={{
+                    label: 'shift',
+                    value: 'shift'
+                  }}
+                />
+              </View>
+            </View>
           </View>
           <View style={styles.row}>
             {headersParams.map((header: string, index: number) => (
@@ -49,7 +106,7 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
           </View>
           <FlatList
             nestedScrollEnabled={true}
-            data={data.slice((page - 1) * 5, page * 5)}
+            data={ value === 'Default' ? data.slice((page - 1) * 5, page * 5) : filterData}
             renderItem={({ item }) => (
               <View style={styles.rowData}>
                 {Object.keys(item).map((key, index) => (
@@ -85,124 +142,3 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  table: {
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#F0F0F0',
-    backgroundColor: '#FFFFFF',
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 16,
-    margin: 24,
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingTop: 24,
-    paddingBottom: 10,
-    width: wp('50%'),
-    height: hp('58%'),
-  },
-  row: {
-    flexDirection: 'row',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderColor: '#007173',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-    backgroundColor: '#007173',
-    marginTop: 16,
-    padding: 16,
-  },
-  rowData: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  header: {
-    flex: 1,
-    fontFamily: Font.LexendDeca_Regular,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#FFFFFF',
-  },
-  cell: {
-    flex: 1,
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: 16,
-    textAlign: 'center',
-    color: 'black',
-    borderWidth: 0.5,
-    borderColor: '#F0F0F0',
-    padding: 16,
-  },
-  titleParams: {
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 28,
-    textAlign: 'center',
-    color: '#007173', 
-  },
-  containerPagination: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    alignSelf: 'flex-end',
-  },
-  pagination: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  paginationItem: {
-    color: 'black',
-    padding: 10,
-    marginHorizontal: 5,
-    borderRadius: 5,
-  },
-  paginationItemSelected: {
-    flexDirection: 'row',
-    backgroundColor: '#007173',
-  },
-  txtPage: {
-    color: '#007173',
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '200',
-    textAlign: 'center',
-    fontSize: 20,
-  },
-  txtPageFocused: {
-    color: '#FFFFFF',
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 20,
-  },
-  btnNext: {
-    color: '#007173',
-    marginHorizontal: 10,
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 25,
-  },
-  btnPrevious: {
-    color: '#007173',
-    marginHorizontal: 10,
-    fontFamily: Font.LexendDeca_Thin,
-    fontStyle: 'normal',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 25,
-  }
-});

@@ -3,8 +3,6 @@ import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, ScrollVie
 import {styles} from './InfoScreen.styles';
 import { HeaderCustomize } from '~components';
 import { getSource } from '~assets';
-import { Font } from '~assets/fonts';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 const data = {
   idStaff: 'CN01',

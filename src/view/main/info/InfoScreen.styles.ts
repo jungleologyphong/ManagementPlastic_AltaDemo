@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   containerEdition: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent:'center',
     alignItems: 'center',
     width: wp('65%'),

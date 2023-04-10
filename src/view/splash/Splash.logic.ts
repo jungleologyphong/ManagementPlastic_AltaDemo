@@ -16,8 +16,8 @@ export const SplashLogic = () => {
         CodePush.sync(
           deploymentKey
             ? {
-                deploymentKey,
-              }
+              deploymentKey,
+            }
             : {},
           codePushStatusDidChange,
         );
