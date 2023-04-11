@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { InfoBlowScreen ,BlowScreen, DeviceScreen, QuantityScreen, QuantityComfirmScreen, InfoScreen} from '~view';
+import { InfoBlowScreen ,BlowScreen, QuantityScreen, QuantityComfirmScreen} from '~view';
 import { Image } from 'react-native';
 import { getSource } from '~assets';
 
@@ -36,14 +36,7 @@ export const MainScreen: React.FC<any> = (props, {navigation}) => {
           />
         );
       },}} />
-      <Tab.Screen name="DeviceScreen" component={DeviceScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
-        return (
-          <Image
-            style={{width: size * 3, height: size * 2.8, transform: [{scale: 0.8}]}}
-            source={focused ? getSource('DEVICE') : getSource('DEVICE_FOCUSED')}
-          />
-        );
-      },}} />
+
       <Tab.Screen name="QuantityComfirmScreen" component={QuantityComfirmScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
         return (
           <Image

@@ -1,9 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {View, TextProps, TouchableOpacity, Text, Image, FlatList, Pressable} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, TextProps, TouchableOpacity, Text, Image, FlatList, Pressable, Modal, TextInput} from 'react-native';
 import DatePicker from 'react-native-date-picker'
-import { getSource } from '~assets';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {styles} from './FlatlistCustomize.Style';
+import {getSource} from '~assets';
 import {useNavigation} from '@react-navigation/native';
 export interface FlatListCustomizeProps extends TextProps {
     titleParams ? : string,
@@ -16,15 +16,13 @@ export interface FlatListCustomizeProps extends TextProps {
 export const FlatlistCustomize: React.FC<any> = (props) => {
   const {headersParams, titleParams, typeFlatlist, dataParams} = props;
 
-  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [unFocus, setUnFocus] = useState(false);
   const [filterData, setFilterData] = useState([]);
-
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [openDropdownShift, setOpenDropdownShift] = useState(false);
   const [openDropdownMachine, setOpenDropdownMachine] = useState(false);
-
+  const [openModal, setOpenModal] = useState(false);
   const [date, setDate] = useState(new Date('2023-01-01'));
   const [value, setValue] = useState('Default');
 
@@ -41,7 +39,7 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
       <View style={styles.containerFilter}>
         <View style={styles.containerDateFilter}>
           <Text style={styles.txtDate}>Ngày</Text>
-          <TouchableOpacity onPress={() => { setOpenDatePicker(true); } } style={styles.containerBtnDate}>
+          <TouchableOpacity onPress={() => { setOpenDatePicker(true);}} style={styles.containerBtnDate}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ width: 250, height: 18, fontSize: 13, color: '#A3A3A3' }}>{' ' + formattedDate}</Text>
               <Image source={getSource('CALENDAR')} />
@@ -91,9 +89,128 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
   shiftObjects.unshift(defaultShift);
 
   const loadData = () => {
-    setData(dataParams);
     setUnFocus(!unFocus);
     setFilterData(filterDataByDateShift(dataParams, formattedDate, value));
+  };
+
+  const ModalAddBlow : React.FC<any> = (props) => {
+    const {} = props;
+  
+    return (
+      <Modal transparent visible={openModal} animationType="none">
+        <View style={styles.containerModal}>
+          <View style={styles.containerInfo}>
+            <View style={styles.containerBody}>
+              <Text style={styles.text3}>Cuộn số</Text>
+              <TextInput placeholder={'Nhập...'} style={styles.textInput} />
+              <Text style={styles.text3}>Nhấn vào ô “Đạt” để đổi trạng thái sang “Không đạt”, tiếp tục nhấn vào ô để đổi trạng thái sang “Tương đối”.</Text>
+              <View style={styles.containerBody2}>
+                <Text style={styles.textModal1}>Tiêu chí</Text>
+                <Text style={styles.textModal2}>Số liệu</Text>
+                <Text style={styles.textModal3}>Đánh giá</Text>
+                <Text style={styles.textModal4}>Số hiệu lực</Text>
+              </View>
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Trọng lượng</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Chiều dài</Text>
+                <Text style={styles.textData}>10</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Chiều ngang</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Xếp hông</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Độ dày</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Lăn gai</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Màu in</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerBody3}>
+                <Text style={styles.textCriteria}>Hình in</Text>
+                <Text style={styles.textData}>30</Text>
+                <View style={styles.containerBtnEvaluate}>
+                  <Pressable style={styles.btnEvaluate}>
+                    <Text style={styles.textBtn}>Đạt</Text>
+                  </Pressable>
+                </View>
+                <TextInput style={styles.textValidNumber} placeholder={'Nhập'} />
+              </View>
+              <View style={styles.line} />
+              <View style={styles.containerRow}>
+                <Pressable style={styles.btnModalCancel} onPress={() => {setOpenModal(false); }}>
+                  <Text style={styles.txtModalSave}>Hủy</Text>
+                </Pressable>
+                <Pressable style={styles.btnSave}  onPress={() => {setOpenModal(false); }}>
+                  <Text style={styles.txtBtnSave}>Lưu</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
   };
 
   useEffect(() => {
@@ -115,22 +232,24 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
           </View>
           <FlatList
             nestedScrollEnabled={true}
-            data={ value === 'Default' ? data.slice((page - 1) * 5, page * 5) : filterData}
+            data={ value === 'Default' ? dataParams.slice((page - 1) * 5, page * 5) : filterData}
             renderItem={({ item }) => (
-              <View style={styles.rowData}>
-                {Object.keys(item).map((key, index) => (
-                  <Text key={index} style={styles.cell}>
-                    {item[key]}
-                  </Text>
-                ))}
-              </View>
+              <TouchableOpacity onPress={() => {navigation.navigate('QuantityComfirmScreen'); console.log(item)}}>
+                <View style={styles.rowData}>
+                  {Object.keys(item).map((key, index) => (
+                    <Text key={index} style={styles.cell}>
+                      {item[key]}
+                    </Text>
+                  ))}
+                </View>
+              </TouchableOpacity>
             )} keyExtractor={(item, index) => index.toString()} />
           <View style={styles.containerPagination}>
             <TouchableOpacity onPress={() => setPage(page - 1)}>
               <Text style={styles.btnPrevious}>{'<'}</Text>
             </TouchableOpacity>
-            {Array(Math.ceil(data.length / 5))
-              .fill(data)
+            {Array(Math.ceil(dataParams.length / 5))
+              .fill(dataParams)
               .map((_, index) => (
                 <TouchableOpacity
                   key={index}
@@ -149,6 +268,7 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
         </View>
       </View>
     </> : <>
+      <ModalAddBlow showModal={openModal} />
       <View style={styles.container}>
         <View style={styles.table}>
           <Text style={styles.titleParams}>{titleParams}</Text>
@@ -174,17 +294,19 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
               </Text>
             ))}
           </View>
-          {data === null ? 
+          {dataParams === null ? 
           <>
             <FlatList
               nestedScrollEnabled={true}
-              data={ value === 'Default' ? data.slice((page - 1) * 5, page * 5) : filterData}
+              data={ value === 'Default' ? dataParams.slice((page - 1) * 5, page * 5) : filterData}
               renderItem={({ item }) => (
                 <View style={styles.rowData}>
                   {Object.keys(item).map((key, index) => (
-                    <Text key={index} style={styles.cell}>
-                      {item[key]}
-                    </Text>
+                    <Pressable onPress={() => {setOpenModal(true); }}>
+                      <Text key={index} style={styles.cell}>
+                        {item[key]}
+                      </Text>
+                    </Pressable>
                   ))}
                 </View>
               )} keyExtractor={(item, index) => index.toString()} />
@@ -194,7 +316,7 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
             <View></View>
           </>}
           <View style={styles.containerBtnEdition}>
-            <TouchableOpacity style={styles.btnEditionSave}>
+            <TouchableOpacity style={styles.btnEditionSave} onPress={() => {setOpenModal(true);}}>
               <Text style={styles.txtBtnSave}>Thêm cuộn</Text>
             </TouchableOpacity>
             <View style={styles.btnEdition}>

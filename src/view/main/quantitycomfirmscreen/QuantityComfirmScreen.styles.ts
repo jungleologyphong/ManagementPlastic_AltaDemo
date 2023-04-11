@@ -226,6 +226,10 @@ export const styles = StyleSheet.create({
     height: 35, 
     margin: 15,
   },
+  txtModalSave: {
+    color: '#007173',
+    fontWeight: '900'
+  },
   txtBtnSave: {
     color: '#FFFFFF',
     fontWeight: '900'
