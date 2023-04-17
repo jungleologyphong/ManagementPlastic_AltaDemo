@@ -69,7 +69,7 @@ export class HTTPRepository {
       console.log('response', response);
       Toast.show({
         type: 'error',
-        text1: locale[this.language][response?.data?.message],
+        text1: locale[this.language].error,
       });
     }
   }

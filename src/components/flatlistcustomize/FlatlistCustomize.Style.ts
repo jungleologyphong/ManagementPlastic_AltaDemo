@@ -10,26 +10,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  containerFilter: {
+  containerDateFilter3: {
     flexDirection: 'row', 
     alignItems: 'center', 
-    justifyContent:'center', 
-    marginTop: 50, 
-    marginBottom: 35
+    marginLeft: 30
   },
-  containerDateFilter: {
-    flexDirection: 'row', 
+  containerDropDown: {
+    zIndex: 1,
     alignItems: 'center', 
-    marginRight: 30
-  },
-  containerBtnDate : {
-    padding: 15, 
-    justifyContent:'center', 
-    borderWidth: 2, 
-    borderRadius: 5, 
-    borderColor: '#E0E0E0', 
-    width: 300, 
-    height: 50
+    justifyContent: 'center'
   },
   containerModal: {
     justifyContent: 'center',
@@ -222,7 +211,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  header: {
+  headerColumn1: {
+    width: 200,
     flex: 1,
     fontFamily: Font.LexendDeca_Regular,
     fontStyle: 'normal',
@@ -243,13 +233,17 @@ export const styles = StyleSheet.create({
     borderColor: '#F0F0F0',
     padding: 16,
   },
-  txtDate: {
+  cell2: {
+    flex: 1,
     fontFamily: Font.LexendDeca_Thin,
     fontStyle: 'normal',
-    fontWeight: '700',
-    fontSize: 23,
-    color: '#007173',
-    marginRight: 10,
+    fontWeight: '400',
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'black',
+    borderWidth: 0.5,
+    borderColor: '#F0F0F0',
+    padding: 16,
   },
   titleParams: {
     fontFamily: Font.LexendDeca_Thin,
@@ -315,7 +309,7 @@ export const styles = StyleSheet.create({
   },
   containerBtnEdition: {
     flexDirection: 'row', 
-    justifyContent:'center'
+    justifyContent:'center',
   },
   btnEdition: {
     backgroundColor: '#FEFEFE', 
@@ -327,7 +321,7 @@ export const styles = StyleSheet.create({
     justifyContent:'center', 
     alignItems: 'center',
     marginTop: 10,
-    
+    marginLeft: 10,
   },
   btnEditionSave: {
     justifyContent:'center', 
@@ -340,6 +334,7 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     width: 135, 
     height: 35,
+    marginHorizontal: 250,
   },
   btnModalCancel: {
     justifyContent:'center', 

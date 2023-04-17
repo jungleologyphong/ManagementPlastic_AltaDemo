@@ -11,7 +11,7 @@ import {AppLogic} from './src';
 import MQTTProvider from '~core/helper/hooks/mqtt';
 const App = () => {
   const {language, memoLangData, will, clientId} = AppLogic();
-
+  console.clear();
   return (
     <IntlProvider
       locale={language}

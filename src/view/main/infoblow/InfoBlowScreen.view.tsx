@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { getSource } from '~assets';
-import { Font } from '~assets/fonts';
-import { HeaderCustomize } from '~components';
+import { HeaderCustomizeView } from '~components';
 import {styles} from './InfoBlowScreen.styles';
 
 export const InfoBlowScreen: React.FC<any> = (props) => {
@@ -11,7 +10,7 @@ export const InfoBlowScreen: React.FC<any> = (props) => {
   const {} = props;
   return (
     <View style={styles.container}>
-      <HeaderCustomize title={'Túi Bio Bag 4 ly, màu trắng sứ, không nhám'} type={'Normal'} />
+      <HeaderCustomizeView title={'Túi Bio Bag 4 ly, màu trắng sứ, không nhám'} type={'Normal'} />
       <Grid style={styles.containerGrid}>
         <Row style={styles.containerRow}>
           <Col style={styles.box}>
@@ -38,24 +37,24 @@ export const InfoBlowScreen: React.FC<any> = (props) => {
           </Col>
           <Col style={styles.box}>
             <View>
-              <Image source={getSource('QUANTITYBLOW')} style={{transform: [{scale: 1}], margin: 15}} />
+              <Image source={getSource('QUANTITYBLOW')} style={styles.img2} />
               <View style={styles.containerViewRow}>
-                <View style={{flexDirection: 'column',}}>
+                <View style={styles.column2}>
                   <View style={styles.row}>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '700', fontSize: 18, lineHeight: 30,}}>Trọng lượng:</Text>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30}}>Tịnh: 12,47 kg{'\n'}Tổng: 12.60 kg</Text>
+                    <Text style={styles.title2}>Trọng lượng:</Text>
+                    <Text style={styles.title3}>Tịnh: 12,47 kg{'\n'}Tổng: 12.60 kg</Text>
                   </View>
                   <View style={styles.row}>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '700', fontSize: 18, lineHeight: 30}}>Số lượng sản xuất:</Text>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30}}>1000/2000 kg{'\n'}100 bao{'\n'}160,345 cái</Text>
+                    <Text style={styles.title2}>Số lượng sản xuất:</Text>
+                    <Text style={styles.title3}>1000/2000 kg{'\n'}100 bao{'\n'}160,345 cái</Text>
                   </View>
                   <View style={styles.row}>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '700', fontSize: 18, lineHeight: 30}}>Phế thổi:</Text>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30}}>100/165 kg</Text>
+                    <Text style={styles.title2}>Phế thổi:</Text>
+                    <Text style={styles.title3}>100/165 kg</Text>
                   </View>
                   <View style={styles.row}>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '700', fontSize: 18, lineHeight: 30}}>Phế cắt:</Text>
-                    <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30}}>Quai: 10/40 Kg{'\n'}Cắt: 5/21 Kg</Text>
+                    <Text style={styles.title2}>Phế cắt:</Text>
+                    <Text style={styles.title3}>Quai: 10/40 Kg{'\n'}Cắt: 5/21 Kg</Text>
                   </View>
                 </View>
               </View>
@@ -67,14 +66,14 @@ export const InfoBlowScreen: React.FC<any> = (props) => {
             <View>
               <Image source={getSource('NOTES')} style={styles.img} />
               <View>    
-                <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30, marginLeft: 15,}}>Độ dày dao động từ 50-60mic.</Text>
+                <Text style={styles.title4}>Độ dày dao động từ 50-60mic.</Text>
               </View>
             </View>
           </Col>
           <Col style={styles.box}>
             <View>
-              <Image source={getSource('INTRODUCDE')} style={{transform: [{scale: 1}], margin: 15}} />          
-              <Text style={{fontFamily: Font.LexendDeca_Thin, fontWeight: '200', fontSize: 18, lineHeight: 30, marginLeft: 15,}}>Có dán nhã phụ.</Text>
+              <Image source={getSource('INTRODUCDE')} style={styles.img2} />          
+              <Text style={styles.title4}>Có dán nhã phụ.</Text>
             </View>
           </Col>
         </Row>

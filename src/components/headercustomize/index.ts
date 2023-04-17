@@ -1,1 +1,1 @@
-export {HeaderCustomize} from './HeaderCustomize';
+export {HeaderCustomizeView} from './HeaderCustomize.View';

@@ -5,6 +5,7 @@ const en = {
   welcome: 'welcome',
   DevicePasswordIncorrect: 'Device Password Incorrect',
   success: 'Success',
+  error: 'Failed'
 };
 
 export default en;

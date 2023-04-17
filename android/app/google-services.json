@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "766044046513",
+    "project_id": "managementplastic-ba314",
+    "storage_bucket": "managementplastic-ba314.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766044046513:android:722ebca2a9ea38a774ce90",
+        "android_client_info": {
+          "package_name": "com.managementPlastic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766044046513-969obmrcbthts3dsql0scm60k1a3fp6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3iwy-eS_gSUCB_iuBF8A16ClrpGJlg3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766044046513-969obmrcbthts3dsql0scm60k1a3fp6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

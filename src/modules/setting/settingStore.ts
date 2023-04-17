@@ -24,10 +24,10 @@ const settingStore = createSlice({
   reducers: {
     updateLanguage: (state, action: PayloadAction<string>) =>
       Object.assign(state, {language: action.payload}),
-    setSplash: (state, action: PayloadAction) => {
+    setSplash: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        splashLoad: true,
+        splashLoad: action.payload,
       };
     },
     setMode: (state, action: PayloadAction<string>) =>

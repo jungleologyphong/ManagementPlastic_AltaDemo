@@ -14,7 +14,7 @@ const appReducer = combineReducers({
 const profile = createWhitelistFilter('profileStore', ['token', 'user']);
 const setting = createWhitelistFilter('settingStore', [
   'language',
-  'splash',
+  'splashLoad',
   'mode',
 ]);
 const app = createWhitelistFilter('appStore', ['mode']);

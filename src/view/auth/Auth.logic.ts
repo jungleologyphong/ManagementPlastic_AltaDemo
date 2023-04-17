@@ -4,9 +4,9 @@ import {useTimeout} from '~core';
 import {LanguageSelector} from '~modules/setting';
 export const AuthLogic = () => {
   const {language} = useSelector(LanguageSelector);
-  const dispatch = useDispatch();
   const {timeOut, timeOutClear} = useTimeout();
   const [time, setTime] = useState(0);
+  const dispatch = useDispatch();
   const test = () => {
     setTime(10);
   };

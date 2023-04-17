@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+import React from 'react';
 import {View, Text, Image, TextInput, Modal, ImageBackground, TouchableOpacity} from 'react-native';
 import {styles} from './LoginScreen.styles';
-import CheckBox from '@react-native-community/checkbox';
 import {getSource} from '~assets';
-import { FlatButton } from '~components';
+import {FlatButton} from '~components';
+import { LoginScreenLogic } from './LoginScreen.Logic';
+import CheckBox from '@react-native-community/checkbox';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
 
 const ModalLogin : React.FC<any> = (props) => {
   const {fullname, idStaff, birthday, type, showModal} = props;
-
   return (
     <Modal transparent visible={showModal} animationType="slide">
       <View style={styles.containerModal}>
@@ -37,18 +41,11 @@ const ModalLogin : React.FC<any> = (props) => {
   );
 };
 
-export const LoginScreen: React.FC<any> = ({navigation}, props) => {
+export const LoginScreen: React.FC<any> = (props) => {
   const {} = props;
-  const [isShowModal, setIsShowModal] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isChecked, setChecked] = useState(false);
-  const [checkDarkMode, setDarkMode] = useState(false);
+  const {isShowModal, setIsShowModal, isChecked, setChecked, checkDarkMode, payload, setPayload, toggleDarkMode, handleLogin} = LoginScreenLogic();
 
-  const toggleDarkMode = () => {
-    setDarkMode(!checkDarkMode);
-  };
-
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   return (
     <View style={checkDarkMode ? styles.containerBlack : styles.container}>
       <View style={styles.containerForm}>
@@ -57,14 +54,12 @@ export const LoginScreen: React.FC<any> = ({navigation}, props) => {
         <TextInput style={styles.textInput}
           placeholder="example@example.com"
           placeholderTextColor={'#FFFFFF'}
-          onChangeText={(text) => setUsername(text)}
-          value={username}/>
+          onChangeText={(tx: string) => setPayload({...payload, username: tx})}/>
         <TextInput style={styles.textInput}
           placeholder="****** (A-Z,a-z,0-9)"
           placeholderTextColor={'#E6E6FA'}
           secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-          value={password}/>
+          onChangeText={(tx: string) => setPayload({...payload, password: tx})}/>
         <View style={styles.containerRemember}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <CheckBox    
@@ -73,15 +68,18 @@ export const LoginScreen: React.FC<any> = ({navigation}, props) => {
               style={styles.checkbox}/>
             <Text style={styles.rember}>Remember me</Text>
           </View>
-          <Text onPress={() => console.log("Forgot Password")} style={styles.forgotPassword}>Forgot Password?</Text>
+          
+          <Text onPress={() => 
+            console.log('Forgot Password')} style={styles.forgotPassword}>Forgot Password?</Text>
         </View>
         <TouchableOpacity
           style={styles.flatButton}
           onPress={() => {
+            handleLogin(); 
+            navigation.navigate('MainScreen');
             setIsShowModal(true);
             setTimeout(() => {
               setIsShowModal(false);
-              navigation.navigate('MainScreen');
             }, 5000);
           }}>
           <Text style={styles.textButton}>LOGIN</Text>

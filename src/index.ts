@@ -1,10 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
-// import { configTranslation } from '~helper/translate';
 import {LanguageSelector} from '~modules/setting/settingStore';
 import Crash, {UserConfirmation} from 'appcenter-crashes';
-import AppCenter from 'appcenter';
-import {requestMultiple, PERMISSIONS} from 'react-native-permissions';
 import {locale} from '~language';
 import {randIdCreator} from '~core';
 

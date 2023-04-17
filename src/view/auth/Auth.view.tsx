@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  ActivityIndicator,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
@@ -60,8 +59,8 @@ export const Auth: React.FC<any> = props => {
         onPress={() => {
           signInBySingleAsync
             ?.execute({
-              deviceUserName: 'ALTA_A1',
-              devicePassword: 'Alta@2021',
+              username: payload.username,
+              password: payload.password,
             })
             ?.then(res => {
               console.log('res', res, signInBySingleAsync.status);

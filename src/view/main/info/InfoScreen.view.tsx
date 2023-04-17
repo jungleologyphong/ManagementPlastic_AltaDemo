@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import {styles} from './InfoScreen.styles';
-import { HeaderCustomize } from '~components';
+import { HeaderCustomizeView } from '~components';
 import { getSource } from '~assets';
+import { InfoScreenLogic } from './InfoScreen.Logic';
 
 const data = {
   idStaff: 'CN01',
@@ -41,7 +42,7 @@ export const InfoScreen : React.FC<any> = (props) => {
   const {} = props;
   //isEdited check layout
   const [isEdited, setEdited] = useState(true);
-
+  const {dataUser} = InfoScreenLogic();
   const handleEdited = () => {
     setEdited(!isEdited);
   };
@@ -49,7 +50,7 @@ export const InfoScreen : React.FC<any> = (props) => {
     isEdited ?
     //Layout 1
     <View style={styles.superContainer}>
-      <HeaderCustomize type='Infomation' title='Thông tin cá nhân'  />
+      <HeaderCustomizeView type='Infomation' title='Thông tin cá nhân'  />
       <View style={styles.container}>
         <View style={styles.containerAvatar}>
           <Image style={styles.avatarInfomation} source={getSource('AVATARINFOMATION')} />
@@ -80,7 +81,7 @@ export const InfoScreen : React.FC<any> = (props) => {
     </View> : 
     //Layout 2
     <View style={styles.superContainer}>
-      <HeaderCustomize type='Infomation' title='Thông tin cá nhân'  />
+      <HeaderCustomizeView type='Infomation' title='Thông tin cá nhân'  />
       <View style={styles.container}>
         <View style={styles.containerAvatar}>
           <Image style={styles.avatarInfomation} source={getSource('AVATARINFOMATION')} />

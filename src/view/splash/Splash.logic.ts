@@ -24,7 +24,7 @@ export const SplashLogic = () => {
       }, 1000);
     } else {
       setTimeout(() => {
-        dispatch(settingStore.actions.setSplash());
+        dispatch(settingStore.actions.setSplash(true));
       }, 1000);
     }
   }, []);
@@ -70,7 +70,7 @@ export const SplashLogic = () => {
 
   React.useEffect(() => {
     if (codePushSuccess) {
-      dispatch(settingStore.actions.setSplash());
+      dispatch(settingStore.actions.setSplash(false));
     }
   }, [codePushSuccess]);
 

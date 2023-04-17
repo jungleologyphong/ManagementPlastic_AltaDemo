@@ -2,6 +2,7 @@ import {useState, useCallback} from 'react';
 interface IState<T> {
   status: 'ready' | 'loading' | 'error';
   value?: T;
+  code: any;
   error: any;
 }
 
@@ -10,6 +11,7 @@ export function useSingleAsync<T = any>(
 ) {
   const [state, setState] = useState<IState<T>>({
     status: 'ready',
+    code: '',
     value: undefined,
     error: null,
   });
@@ -40,6 +42,7 @@ export function useSingleAsync<T = any>(
       setState(prevState => ({
         ...prevState,
         status: 'loading',
+        code: '',
         value: undefined,
         error: null,
       }));

@@ -1,1 +1,1 @@
-export {FlatlistCustomize} from './FlatlistCustomize';
+export {FlatlistCustomize} from './FlatlistCustomize.View';

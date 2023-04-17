@@ -6,4 +6,3 @@ export * from './main/infoblow';
 export * from './main/blow';
 export * from './main/info';
 export * from './main/quantity';
-export * from './main/quantitycomfirmscreen';

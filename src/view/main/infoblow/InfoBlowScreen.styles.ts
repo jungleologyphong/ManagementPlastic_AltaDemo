@@ -37,6 +37,26 @@ export const styles = StyleSheet.create({
     fontSize: 18, 
     lineHeight: 35
   },
+  title2: {
+    fontFamily: Font.LexendDeca_Thin, 
+    fontWeight: '700', 
+    fontSize: 18, 
+    lineHeight: 30, 
+    width: 175
+  },
+  title3: {
+    fontFamily: Font.LexendDeca_Thin, 
+    fontWeight: '200', 
+    fontSize: 18, 
+    lineHeight: 30
+  },
+  title4: {
+    fontFamily: Font.LexendDeca_Thin, 
+    fontWeight: '200', 
+    fontSize: 18, 
+    lineHeight: 30, 
+    marginLeft: 15
+  },
   dotRed: {
     width: 16, 
     height: 16, 
@@ -75,7 +95,7 @@ export const styles = StyleSheet.create({
     marginLeft: 55
   },
   column2: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   box: {
     flex: 1,
@@ -94,6 +114,10 @@ export const styles = StyleSheet.create({
   img: {
     transform: [{scale: 1}], 
     margin: 15
-  }
+  },
+  img2: {
+    transform: [{scale: 1}], 
+    margin: 15
+  },
 });
   

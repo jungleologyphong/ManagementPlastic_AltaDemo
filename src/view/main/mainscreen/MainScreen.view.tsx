@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { InfoBlowScreen ,BlowScreen, QuantityScreen, QuantityComfirmScreen} from '~view';
-import { Image } from 'react-native';
-import { getSource } from '~assets';
+import {createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {InfoBlowScreen ,BlowScreen, QuantityScreen} from '~view';
+import {Image} from 'react-native';
+import {getSource} from '~assets';
 
 const Tab = createBottomTabNavigator();
 
-export const MainScreen: React.FC<any> = (props, {navigation}) => {
+export const MainScreen: React.FC<any> = (props) => {
   const {} = props;
 
   return (
@@ -33,15 +33,6 @@ export const MainScreen: React.FC<any> = (props, {navigation}) => {
           <Image
             style={{width: size * 3, height: size * 3.2,  transform: [{scale: 0.7}]}}
             source={focused ? getSource('QUANTITY') : getSource('QUANTITY_FOCUSED')}
-          />
-        );
-      },}} />
-
-      <Tab.Screen name="QuantityComfirmScreen" component={QuantityComfirmScreen} options={{ title: '', headerShown: false, tabBarIcon: ({size, focused}) => {
-        return (
-          <Image
-            style={{width: size * 3.75, height: size * 2.2  ,}}
-            source={focused ? getSource('QUANTITYCOMFIRM') : getSource('QUANTITYCOMFIRM_FOCUSED')}
           />
         );
       },}} />

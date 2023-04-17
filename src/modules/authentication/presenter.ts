@@ -6,7 +6,7 @@ const authPresenter = {...repository};
 
 authPresenter.login = async (payload: repository.ILoginDTO) => {
   const token = await repository.login(payload);
-  store.dispatch(profileStore.actions.login(token?.deviceToken));
+  store.dispatch(profileStore.actions.login(token?.accessToken));
   return token;
 };
 

@@ -7,6 +7,9 @@ import {Font} from '~assets/fonts';
 
 export const styles = StyleSheet.create({
   container: {
+    margin: 0, 
+    padding: 0,
+    marginTop: 50,
     justifyContent: 'center', 
     alignItems: 'center', 
     flex: 1
