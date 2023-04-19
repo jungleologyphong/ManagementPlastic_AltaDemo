@@ -1,22 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import {styles} from './InfoScreen.styles';
 import { HeaderCustomizeView } from '~components';
 import { getSource } from '~assets';
 import { InfoScreenLogic } from './InfoScreen.Logic';
-
-const data = {
-  idStaff: 'CN01',
-  fullname: 'Nguyễn Viết Anh Nguyên',
-  group: 'Thổi',
-  idGroup: 1,
-  gender: 'Nữ',
-  CMND: 124532145632,
-  gmail: 'nguyen.nguyen@alta.com.vn',
-  phone: '0954126514',
-  date: '21/12/1993',
-  address: '220/54/12 Âu Cơ, P.9, Q.Tân Bình, TP.Hồ Chí Minh'
-};
+import localStorage from 'redux-persist/es/storage';
 
 const Infomation : React.FC<any> = (props: { title: string; content: string; }) => {
   const {title, content} = props;
@@ -29,23 +17,20 @@ const Infomation : React.FC<any> = (props: { title: string; content: string; }) 
 };
 
 const Edtion : React.FC<any> = (props) => {
-  const {title, content} = props;
+  const {title, content, setValuesField} = props;
+
   return (
     <View style={styles.containerViewEdition}>
       <Text style={styles.title}>{title}{':'}{' '}</Text>
-      <TextInput value={content} editable={false} onChangeText={(value) => console.log(value)} style={styles.textInput} />
+      <TextInput defaultValue={content} onChangeText={(text) => setValuesField(text)} style={styles.textInput} />
     </View>
   );
 };
 
 export const InfoScreen : React.FC<any> = (props) => {
   const {} = props;
+  const {isEdited, handleEdited, formData, handleFieldChange, setIdStaff, setFullname, setGroup, setIdGroup, setGender, setCMND, setGmail, setAddress, setPhone, setDate, newData, checkEditInfo} = InfoScreenLogic();
   //isEdited check layout
-  const [isEdited, setEdited] = useState(true);
-  const {dataUser} = InfoScreenLogic();
-  const handleEdited = () => {
-    setEdited(!isEdited);
-  };
   return (
     isEdited ?
     //Layout 1
@@ -63,25 +48,25 @@ export const InfoScreen : React.FC<any> = (props) => {
         </View>
         <View style={styles.containerInfomation}>
           <View style={styles.containerInfoLeft}>
-            <Infomation title={'Mã công nhân'} content={data.idStaff}/>
-            <Infomation title={'Tên công nhân'} content={data.fullname}/>
-            <Infomation title={'Tổ'} content={data.group}/>
-            <Infomation title={'Nhóm'} content={data.idGroup}/>
-            <Infomation title={'Giới tính'} content={data.gender}/>
+            <Infomation title={'Mã công nhân'} content={!checkEditInfo ? formData.idStaff : newData.idStaff} />
+            <Infomation title={'Tên công nhân'} content={!checkEditInfo ? formData.fullname : newData.fullname} />
+            <Infomation title={'Tổ'} content={!checkEditInfo ? formData.group : newData.group}/>
+            <Infomation title={'Nhóm'} content={!checkEditInfo ? formData.idGroup + '' : newData.idGroup + ''} />
+            <Infomation title={'Giới tính'} content={!checkEditInfo ? formData.gender : newData.gender} />
           </View>
           <View style={styles.containerInfoRight}>
-            <Infomation title={'CMND/CCCD'} content={data.CMND}/>
-            <Infomation title={'Email'} content={data.gmail}/>
-            <Infomation title={'Số điện thoại'} content={data.phone}/>
-            <Infomation title={'Ngày sinh'} content={data.date}/>
-            <Infomation title={'Địa chỉ'} content={data.address}/>
+            <Infomation title={'CMND/CCCD'} content={!checkEditInfo ? formData.CMND + '' : newData.CMND + ''} />
+            <Infomation title={'Email'} content={!checkEditInfo ? formData.gmail : newData.gmail} />
+            <Infomation title={'Số điện thoại'} content={!checkEditInfo ? formData.idStaff : newData.phone} />
+            <Infomation title={'Ngày sinh'} content={!checkEditInfo ? formData.date : newData.date}/>
+            <Infomation title={'Địa chỉ'} content={!checkEditInfo ? formData.address : newData.address} name={'idStaff'}/>
           </View>
         </View>
       </View>
     </View> : 
     //Layout 2
     <View style={styles.superContainer}>
-      <HeaderCustomizeView type='Infomation' title='Thông tin cá nhân'  />
+      <HeaderCustomizeView type='Infomation' title='Thông tin cá nhân' />
       <View style={styles.container}>
         <View style={styles.containerAvatar}>
           <Image style={styles.avatarInfomation} source={getSource('AVATARINFOMATION')} />
@@ -96,25 +81,25 @@ export const InfoScreen : React.FC<any> = (props) => {
           <ScrollView>
             <View style={styles.containerEdition}>
               <View style={styles.containerInfoLeft}>
-                <Edtion title={'Mã công nhân'} content={data.idStaff} />
-                <Edtion title={'Tên công nhân'} content={data.fullname} />
-                <Edtion title={'Tổ'} content={data.group} />
-                <Edtion title={'Nhóm'} content={data.idGroup + ''} />
-                <Edtion title={'Giới tính'} content={data.gender} />
+                <Edtion title={'Mã công nhân'} content={!checkEditInfo ? formData.idStaff : newData.idStaff} name={'idStaff'} setValuesField={setIdStaff}  />
+                <Edtion title={'Tên công nhân'} content={!checkEditInfo ? formData.fullname : newData.fullname} name={'fullname'} setValuesField={setFullname} />
+                <Edtion title={'Tổ'} content={!checkEditInfo ? formData.group : newData.group} name={'group'} setValuesField={setGroup} />
+                <Edtion title={'Nhóm'} content={!checkEditInfo ? formData.idGroup + '' : newData.idGroup + ''} name={'group'} setValuesField={setIdGroup} />
+                <Edtion title={'Giới tính'} content={!checkEditInfo ? formData.gender : newData.gender} name={'gender'} setValuesField={setGender} />
               </View>
               <View style={styles.containerInfoRight}>
-                <Edtion title={'CMND/CCCD'} content={data.CMND + ''} />
-                <Edtion title={'Email'} content={data.gmail} />
-                <Edtion title={'Số điện thoại'} content={data.phone} />
-                <Edtion title={'Ngày sinh'} content={data.date} />
-                <Edtion title={'Địa chỉ'} content={data.address} />
+                <Edtion title={'CMND/CCCD'} content={!checkEditInfo ? formData.CMND + '' : newData.CMND + ''} name={'CMND'} setValuesField={setCMND} />
+                <Edtion title={'Email'} content={!checkEditInfo ? formData.gmail : newData.gmail} name={'gmail'} setValuesField={setGmail} />
+                <Edtion title={'Số điện thoại'} content={!checkEditInfo ? formData.phone : newData.phone} name={'phone'} setValuesField={setPhone} />
+                <Edtion title={'Ngày sinh'} content={!checkEditInfo ? formData.date : newData.date} name={'date'} setValuesField={setDate} />
+                <Edtion title={'Địa chỉ'} content={!checkEditInfo ? formData.address : newData.address} name={'address'} setValuesField={setAddress} />
               </View>
             </View>
             <View style={styles.containerBtnEdition}>
-              <TouchableOpacity style={styles.btnEdition}>
+              <TouchableOpacity style={styles.btnEdition} onPress={() => handleEdited()}>
                 <Text style={styles.txtBtnCancel}>Hủy</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btnEditionSave}>
+              <TouchableOpacity style={styles.btnEditionSave} onPress={() => {handleFieldChange(); handleEdited()}}>
                 <Text style={styles.txtBtnSave}>Lưu</Text>
               </TouchableOpacity>
             </View>

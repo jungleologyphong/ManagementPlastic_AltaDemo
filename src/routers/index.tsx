@@ -7,8 +7,6 @@ import {Splash, LoginScreen, MainScreen, InfoScreen, InfoBlowScreen, BlowScreen,
 import {navigationRef} from '~core/helper/navigate';
 import { TokenSelector } from '~modules/authentication';
 
-
-
 const Stack = createNativeStackNavigator();
 const privateScreen: any[] = [LoginScreen];
 

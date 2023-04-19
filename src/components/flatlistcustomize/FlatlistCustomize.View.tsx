@@ -143,6 +143,16 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
     );
   };
 
+  const Header = (props: { column: string; }) => {
+    const {column} = props;
+    return (
+      <Text style={styles.headerColumn1}>
+        {column}
+      </Text>
+    );
+  };
+  
+
   return (
     typeFlatlist === 'Normal' ? <>
       <View style={styles.container}>
@@ -150,11 +160,9 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
           <Text style={styles.titleParams}>{titleParams}</Text>
           <FilterCustomize dropdownParams={dropdownParams}/>
           <View style={styles.row}>
-            {headersParams.map((items: string) => {
+            {headersParams.map((header, index) => {
               return (
-                <Text style={styles.headerColumn1}>
-                  {items.column}
-                </Text>
+                <Header key={index} column={header.column} />
               );
             })}
           </View>
@@ -212,11 +220,9 @@ export const FlatlistCustomize: React.FC<any> = (props) => {
             setValue={setValue} /> */}
           <Text style={styles.text2}>Đánh giá</Text>
           <View style={styles.row}>
-            {headersParams2.map((items: string) => {
+            {headersParams2.map((header, index) => {
               return (
-                <Text style={styles.headerColumn1}>
-                  {items.column}
-                </Text>
+                <Header key={index} column={header.column} />
               );
             })}
           </View>

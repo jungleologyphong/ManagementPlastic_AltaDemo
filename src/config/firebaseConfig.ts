@@ -1,6 +1,6 @@
-import { firebase } from '@react-native-firebase/database';
+import firebase from '@react-native-firebase/app';
 
-const firebaseConfig = {
+const androidCredentials = {
   apiKey: 'AIzaSyDn76z8cT_80SuaafCsRCPuQXObB1JATB4',
   authDomain: 'managementplastic-ba314.firebaseapp.com',
   databaseURL: 'https://managementplastic-ba314-default-rtdb.firebaseio.com',
@@ -11,4 +11,8 @@ const firebaseConfig = {
   measurementId: 'G-WW6CS6NC6C'
 };
   
-firebase.initializeApp(firebaseConfig);
+const config = {
+  name: 'ManagementPlastic',
+};
+  
+export default firebase.initializeApp(androidCredentials, config);

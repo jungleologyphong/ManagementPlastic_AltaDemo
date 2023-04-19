@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700', 
     fontSize: 18, 
     lineHeight: 30, 
-    width: 175
+    width: 200
   },
   title3: {
     fontFamily: Font.LexendDeca_Thin, 

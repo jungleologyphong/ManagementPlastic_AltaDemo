@@ -34,6 +34,7 @@ export const FlatlistCustomizeLogic = (props: Props) => {
     {
       column: titleColumn2
     },
+    ...Object.values(otherColumns).map(column => ({ column }))
   ];
 
   const [showModalComfirm, setShowModalComfirm] = useState(false);
