@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, ScrollView, Modal, Pressable, TextInput} from 'react-native';
-import {TouchableOpacity } from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from './ModalComfirmQuantity.styles';
+import { ModalComfirmLogic } from './ModalComfirmQuantity.Logic';
 
 const ModalComfirm : React.FC<any> = (props) => {
   const {showModal, setIsShowModal} = props;
@@ -50,9 +50,9 @@ const ModalRefuse : React.FC<any> = (props) => {
 };
 
 export const ModalComfirmQuantity: React.FC<any> = props => {
-  const {showModalComfirm, setShowModalComfirm} = props;
-  const [isShowModal, setIsShowModal] = useState(false);
-  const [isShowModalRefuse, setModalRefuse] = useState(false);
+
+  const {showModalComfirm, setShowModalComfirm, IDStaff} = props;
+  const {isShowModal, setIsShowModal, isShowModalRefuse, setModalRefuse} = ModalComfirmLogic(IDStaff);
 
   return (
     <><ModalComfirm showModal={isShowModal} setIsShowModal={setIsShowModal} />
@@ -63,8 +63,8 @@ export const ModalComfirmQuantity: React.FC<any> = props => {
             <View style={styles.margin}>
               <Text style={styles.title}>Thông tin công nhân</Text>
               <View style={styles.containerIdStaff}>
-                <Text style={styles.txtInfoStaff}>Mã công nhân:</Text>
-                <Text style={styles.txtInfoStaff2}>CN01</Text>
+                <Text style={styles.txtInfoStaff}>Mã công nhân</Text>
+                <Text style={styles.txtInfoStaff2}>{IDStaff}</Text>
               </View>
               <View style={styles.containerIdStaff}>
                 <Text style={styles.txtInfoStaff}>Tên công nhân:</Text>

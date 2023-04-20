@@ -13,7 +13,7 @@ interface Props {
 
 export const FlatlistCustomizeLogic = (props: Props) => {
   const {titleColumn1, titleColumn2, titleColumn3, ...otherColumns} = props;
-
+  // const [IDStaff, setIDStaff] = useState();
   const headersParams: Column[] = [
     {
       column: titleColumn1
@@ -38,6 +38,7 @@ export const FlatlistCustomizeLogic = (props: Props) => {
   ];
 
   const [showModalComfirm, setShowModalComfirm] = useState(false);
+  const [IDStaff, setIdStaff] = useState('');
   const [page, setPage] = useState(1);
   const [unFocus, setUnFocus] = useState(false);
   const [filterData, setFilterData] = useState([]);
@@ -56,6 +57,6 @@ export const FlatlistCustomizeLogic = (props: Props) => {
 
   return {
     showModalComfirm, setShowModalComfirm, handleModalComfirm, page, setPage, unFocus, setUnFocus, filterData, setFilterData, loadData, 
-    openDropdownMachine, setOpenDropdownMachine, openModal, setOpenModal, value, setValue, headersParams, headersParams2
+    openDropdownMachine, setOpenDropdownMachine, openModal, setOpenModal, value, setValue, headersParams, headersParams2, IDStaff, setIdStaff
   };
 };

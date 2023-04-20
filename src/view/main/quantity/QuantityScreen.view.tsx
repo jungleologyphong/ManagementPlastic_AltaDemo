@@ -13,6 +13,7 @@ export const QuantityScreen: React.FC<any> = props => {
     <><HeaderCustomizeView type={'Normal'} title={'Túi Bio Bag 4 ly, màu trắng sứ, không nhám'} />
       <View style={styles.container}>
         <FlatlistCustomize
+          dataLine={5}
           titleColumn1={'Ngày kiểm tra'}
           titleColumn2={'Họ và tên'}
           titleColumn3={'Ca'}
